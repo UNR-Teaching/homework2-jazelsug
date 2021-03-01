@@ -1,5 +1,4 @@
 from person import Person
-import random
 
 
 class Dealer(Person):
@@ -9,7 +8,12 @@ class Dealer(Person):
 
     def dealer_shuffle(self):
         # call shuffle within deck.py
-        self.deck.shuffle()
+        self.person_deck.shuffle()
+
+    def show_hand(self):
+        print("DEALER'S HAND:")
+        for h in self.hand:
+            h.show()
 
     # add deal_card(self) maybe ?
 

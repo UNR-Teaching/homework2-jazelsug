@@ -1,31 +1,36 @@
 from deck import Deck
-
-
-
-
-# PLAYER CLASS ======================
-class Player:
-    def __init__(self, first_bet=0):
-        # TODO: parameter for deck/hand maybe?
-        self.bet = first_bet
-        pass
-
-    def bet(self, amount):
-        self.bet = amount
-
-    # TODO: make hit and stand functions? or make those Person methods + inheritance
+from dealer import Dealer
+from player import Player
 
 
 # BLACKJACK CLASS ===========================
 class BlackJack:
-    def __init__(self):
-        pass
+    def __init__(self, p, d):
+        self.player = p
+        self.dealer = d
+
+    def deal(self):
+        # draw first 4 cards of the game
+        self.player.hit(True)
+        self.player.show_hand()
+        print("\n")
+        self.dealer.hit(True)
+        self.dealer.show_hand()
+        print("\n")
+        self.player.hit(True)
+        self.player.show_hand()
+        print("\n")
+        self.dealer.hit(False)
+        self.dealer.show_hand()
+        print("\n")
 
 
 # MAIN FUNCTION =====================================
 if __name__ == "__main__":
     game_deck = Deck()
-    game_deck.shuffle()
+    p1 = Player(game_deck)
+    d1 = Dealer(game_deck)
+    game = BlackJack(p1, d1)
 
-    for x in game_deck.deck:
-        x.show()
+    d1.dealer_shuffle()
+    game.deal()
