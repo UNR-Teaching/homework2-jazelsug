@@ -18,7 +18,16 @@ class Person:
 
     def check_bust(self):
         if self.score > 21:
-            return True
+            # see if Aces can split from 11 to 1
+            for h in self.hand:
+                if h.value == "A" and h.card_value == 11:
+                    h.card_value = 1
+                    self.get_score()
+            if self.score > 21:
+                return True
+            else:
+                print("Switched Ace value from 11 to 1.")
+                return False
         else:
             return False
 
