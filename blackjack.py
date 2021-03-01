@@ -25,6 +25,7 @@ class BlackJack:
 # MAIN FUNCTION =====================================
 if __name__ == "__main__":
     game_deck = Deck()
+    game_deck.shuffle()
 
     for x in game_deck.deck:
         x.show()

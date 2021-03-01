@@ -12,4 +12,5 @@ class Person:
         self.hand.append(new_card)
 
     def stand(self):
+        # TODO: define here and in children classes
         pass
