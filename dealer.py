@@ -32,10 +32,4 @@ class Dealer(Person):
             print("No dealer natural.")
             return False
 
-    # add deal_card(self) maybe ?
-
     # hit is same as in Person
-
-    def stand(self):
-        # dealer reveals card ?
-        pass
