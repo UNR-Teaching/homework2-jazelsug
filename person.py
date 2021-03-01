@@ -29,6 +29,10 @@ class Person:
                 s += c.card_value
         self.score = s
 
+    def check_naturals(self):
+        if self.score == 21:
+            return True
+
     def show_hand(self):
         print("PERSON'S HAND:")
         for h in self.hand:

@@ -21,6 +21,8 @@ class Player(Person):
         else:
             return False
 
+    # check_naturals is the same as in Person
+
     '''
     def bet(self, amount):
         self.bet = amount

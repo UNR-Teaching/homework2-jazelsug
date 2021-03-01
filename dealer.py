@@ -21,6 +21,14 @@ class Dealer(Person):
             h.face_up = True
         self.get_score()
 
+    def check_naturals(self):
+        # different from in Person - must check face down card
+        nat_score = 0
+        for h in self.hand:
+            nat_score += h.card_value
+        if nat_score == 21:
+            return True
+
     # add deal_card(self) maybe ?
 
     # hit is same as in Person

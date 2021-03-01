@@ -5,7 +5,7 @@ from player import Player
 
 # BLACKJACK CLASS ===========================
 class BlackJack:
-    def __init__(self, p, d, w=False):
+    def __init__(self, p, d, w=None):
         self.player = p
         self.dealer = d
         self.winner = w
@@ -47,25 +47,45 @@ class BlackJack:
                 self.dealer.score = 21
                 self.winner = "Dealer"
 
+    def reveal_all(self):
+        self.dealer.flip_cards()
+        self.dealer.show_hand()
+        self.player.show_hand()
+
+    def check_ties(self):
+        self.reveal_all()
+        if self.player.score == self.dealer.score:
+            return True
+        else:
+            return False
+
     def play_game(self):
         print("LET'S PLAY!\nShuffling deck...\n")
         self.dealer.dealer_shuffle()
-
         self.deal()
-        # check for player naturals
-        self.has_winner()
-        if self.winner:
-            return self.winner
-        # check for dealer naturals
-        self.naturals()
-        if self.winner:
+
+        # check for player natural
+        player_nat = self.player.check_naturals()
+        if player_nat:
+            tied = self.check_ties()
+            if tied:
+                print("TIED GAME!!")
+                self.winner = "Nobody"
+                return self.winner
+            else:
+                print("PLAYER NATURAL!!")
+                self.winner = "Player"
+                return self.winner
+
+        # check for dealer natural
+        dealer_nat = self.dealer.check_naturals()
+        if dealer_nat:
+            self.reveal_all()
             print("DEALER NATURAL!!")
-            self.dealer.flip_cards()
-            self.dealer.show_hand()
-            self.player.show_hand()
+            self.winner = "Dealer"
             return self.winner
 
-        # continue the play
+        # no naturals, continue the play
         while self.winner is None:
             player_choice = input("Player, hit or stand (H/S): ")
             while player_choice not in {"H", "h", "S", "s"}:
