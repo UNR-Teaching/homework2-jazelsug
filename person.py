@@ -16,6 +16,12 @@ class Person:
         new_card.in_hand = True
         self.get_score()
 
+    def check_bust(self):
+        if self.score > 21:
+            return True
+        else:
+            return False
+
     def stand(self):
         # TODO: define here and in children classes
         # done drawing cards, calculate updated score of cards in hand

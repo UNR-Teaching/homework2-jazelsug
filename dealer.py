@@ -30,6 +30,7 @@ class Dealer(Person):
         if nat_score == 21:
             return True
         else:
+            print("No dealer natural.")
             return False
 
     # add deal_card(self) maybe ?

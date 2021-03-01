@@ -25,11 +25,13 @@ class BlackJack:
         self.dealer.show_hand()
         print("\n")
 
-    def has_winner(self):
-        if self.player.score == 21:
+    def get_winner(self):
+        if self.player.score > self.dealer.score:
             self.winner = "Player"
-        elif self.dealer.score == 21:
+        elif self.player.score < self.dealer.score:
             self.winner = "Dealer"
+        elif self.player.score == self.dealer.score:
+            self.winner = "Nobody"
         else:
             self.winner = None
 
@@ -70,13 +72,14 @@ class BlackJack:
                 self.winner = "Player"
                 return self.winner
 
-        # check for dealer natural
-        dealer_nat = self.dealer.check_naturals()
-        if dealer_nat:
-            self.reveal_all()
-            print("\nDEALER NATURAL!!")
-            self.winner = "Dealer"
-            return self.winner
+        # check for dealer natural if first card is 10 or 11 value
+        if self.dealer.score in {10, 11}:
+            dealer_nat = self.dealer.check_naturals()
+            if dealer_nat:
+                self.reveal_all()
+                print("\nDEALER NATURAL!!")
+                self.winner = "Dealer"
+                return self.winner
 
         # no naturals, continue the play
         while self.winner is None:
@@ -97,11 +100,27 @@ class BlackJack:
                     self.show_all_face_up()
                     # keep playing
             elif player_choice in {"S", "s"}:
+                # stand
                 self.player.stand()
-                # compare player and dealer scores
-                self.winner = "Player"  # TODO: fix!!
-
-        # TODO: display cards after each successful hit
+                self.reveal_all()
+                # dealer hits until score is 17+
+                while self.dealer.score < 17:
+                    self.dealer.hit(True)
+                    self.reveal_all()
+                # check for dealer busts
+                d_bust = self.dealer.check_bust()
+                if d_bust:
+                    print("\nDEALER BUST!!")
+                    self.winner = "Player"
+                    return self.winner
+                # dealer score is 17+, check for ties
+                tied = self.check_ties()
+                if tied:
+                    print("\nTIED GAME!!")
+                    self.winner = "Nobody"
+                    return self.winner
+                else:
+                    self.get_winner()
 
         return self.winner
 
@@ -114,4 +133,4 @@ if __name__ == "__main__":
     game = BlackJack(p1, d1)
 
     winner = game.play_game()
-    print("{} won!".format(winner))
+    print("\n{} won!".format(winner))
