@@ -16,6 +16,11 @@ class Dealer(Person):
             h.show()
         print("Score: {}".format(self.score))
 
+    def flip_cards(self):
+        for h in self.hand:
+            h.face_up = True
+        self.get_score()
+
     # add deal_card(self) maybe ?
 
     # hit is same as in Person

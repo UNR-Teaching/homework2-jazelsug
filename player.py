@@ -15,6 +15,12 @@ class Player(Person):
             h.show()
         print("Score: {}".format(self.score))
 
+    def check_bust(self):
+        if self.score > 21:
+            return True
+        else:
+            return False
+
     '''
     def bet(self, amount):
         self.bet = amount
