@@ -23,11 +23,14 @@ class Dealer(Person):
 
     def check_naturals(self):
         # different from in Person - must check face down card
+        print("Checking for dealer natural...\n")
         nat_score = 0
         for h in self.hand:
             nat_score += h.card_value
         if nat_score == 21:
             return True
+        else:
+            return False
 
     # add deal_card(self) maybe ?
 

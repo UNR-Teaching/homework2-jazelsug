@@ -33,23 +33,16 @@ class BlackJack:
         else:
             self.winner = None
 
-    def naturals(self):
-        # TODO: order of ops - check naturals before drawing dealer's face down card
-
-        if self.dealer.score == 10 or self.dealer.score == 11:
-            # check face down card
-            dealer_score = 0
-            for c in self.dealer.hand:
-                dealer_score += c.card_value
-            if dealer_score == 21:
-                for c in self.dealer.hand:
-                    c.face_up = True
-                self.dealer.score = 21
-                self.winner = "Dealer"
+    def show_all_face_up(self):
+        self.dealer.show_hand()
+        print("\n")
+        self.player.show_hand()
 
     def reveal_all(self):
+        print("\n")
         self.dealer.flip_cards()
         self.dealer.show_hand()
+        print("\n")
         self.player.show_hand()
 
     def check_ties(self):
@@ -69,11 +62,11 @@ class BlackJack:
         if player_nat:
             tied = self.check_ties()
             if tied:
-                print("TIED GAME!!")
+                print("\nTIED GAME!!")
                 self.winner = "Nobody"
                 return self.winner
             else:
-                print("PLAYER NATURAL!!")
+                print("\nPLAYER NATURAL!!")
                 self.winner = "Player"
                 return self.winner
 
@@ -81,24 +74,28 @@ class BlackJack:
         dealer_nat = self.dealer.check_naturals()
         if dealer_nat:
             self.reveal_all()
-            print("DEALER NATURAL!!")
+            print("\nDEALER NATURAL!!")
             self.winner = "Dealer"
             return self.winner
 
         # no naturals, continue the play
         while self.winner is None:
+            # get input from player
             player_choice = input("Player, hit or stand (H/S): ")
             while player_choice not in {"H", "h", "S", "s"}:
                 player_choice = input("Invalid input. Hit or stand (H/S): ")
+
+            # hit
             if player_choice in {"H", "h"}:
                 self.player.hit(True)
                 bust = self.player.check_bust()
                 if bust:
-                    print("PLAYER BUST!!")
-                    self.dealer.flip_cards()
-                    self.dealer.show_hand()
-                    self.player.show_hand()
+                    print("\nPLAYER BUST!!")
+                    self.reveal_all()
                     self.winner = "Dealer"
+                else:
+                    self.show_all_face_up()
+                    # keep playing
             elif player_choice in {"S", "s"}:
                 self.player.stand()
                 # compare player and dealer scores
