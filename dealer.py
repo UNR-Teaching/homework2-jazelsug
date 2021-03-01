@@ -14,6 +14,7 @@ class Dealer(Person):
         print("DEALER'S HAND:")
         for h in self.hand:
             h.show()
+        print("Score: {}".format(self.score))
 
     # add deal_card(self) maybe ?
 

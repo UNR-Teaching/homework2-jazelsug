@@ -13,6 +13,7 @@ class Player(Person):
         print("PLAYER'S HAND:")
         for h in self.hand:
             h.show()
+        print("Score: {}".format(self.score))
 
     '''
     def bet(self, amount):
