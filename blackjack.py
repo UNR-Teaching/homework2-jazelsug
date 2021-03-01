@@ -1,17 +1,6 @@
-import deck
+from deck import Deck
 
 
-# DEALER CLASS ==================
-class Dealer:
-    def __init__(self):
-        # TODO: add parameter for deck/hand maybe?
-        pass
-
-    def shuffle(self):
-        pass
-
-    def deal_card(self):
-        pass
 
 
 # PLAYER CLASS ======================
@@ -35,7 +24,7 @@ class BlackJack:
 
 # MAIN FUNCTION =====================================
 if __name__ == "__main__":
-    game_deck = deck.Deck()
+    game_deck = Deck()
 
     for x in game_deck.deck:
         x.show()
