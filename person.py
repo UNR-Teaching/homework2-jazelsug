@@ -23,10 +23,8 @@ class Person:
             return False
 
     def stand(self):
-        # TODO: define here and in children classes
         # done drawing cards, calculate updated score of cards in hand
         self.get_score()
-        # return score maybe?
 
     def get_score(self):
         s = 0

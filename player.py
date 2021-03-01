@@ -4,7 +4,6 @@ from person import Person
 class Player(Person):
     def __init__(self, d):
         Person.__init__(self, d)
-        # TODO: parameter for deck/hand maybe?
         # TODO: player bets?
 
     # hit is the same as in Person

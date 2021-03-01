@@ -22,8 +22,6 @@ class Card:
         self.in_hand = h
 
     def show(self):
-        # TODO: maybe add 2nd bool param for whether or not card should be displayed ?
-        # TODO: what to do with card_value, if anything ?
         if self.face_up:
             print("{} of {}".format(self.value, self.suit))
         else:
