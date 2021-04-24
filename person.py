@@ -86,6 +86,7 @@ class Person:
     def check_naturals(self):
         """Function for checking if the Person has a natural or Blackjack
         (first two cards are an ace and a "ten-card", resulting in a score of 21).
+        Overridden in Dealer but NOT in Player.
 
         Returns
         -------
