@@ -50,6 +50,12 @@ class Card:
         self.in_hand = h
 
     def show(self):
+        """Function for displaying card information.
+        If the card is face up, the card information will be printed in
+        "<Value> of <Suit>" format. Otherwise, the card value and suit
+        will be hidden and instead an indication of card being face down
+        will be printed.
+        """
         if self.face_up:
             print("{} of {}".format(self.value, self.suit))
         else:
