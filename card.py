@@ -11,13 +11,41 @@ cards_values = {"A": 11, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7,
 
 # CARD CLASS =============
 class Card:
+    """Card class for Blackjack game.
+
+    Parameters
+    ----------
+    suit : str
+        Suit of card (Spades, Hearts, Clubs, or Diamonds)
+    val : str
+        Value of card (A, 2-10, J, Q, K)
+    card_val : int
+        Actual value of card in Blackjack. 2-10 cards have inherent values.
+        J, Q, and K are worth 10. A is worth 11 by default, but can switch
+        to a value of 1 ("soft hand").
+    up : bool, default = True
+        True if card is face-up, False if face-down.
+    h : bool, default = False
+        True if card is in the dealer or player's hand,
+        False if the card is still able to be pulled from the deck.
+        
+    Attributes
+    ----------
+    suit : str
+        Suit of card.
+    value : str
+        Value displayed on card.
+    card_value : int
+        The Blackjack value of the card.
+    face_up : bool
+        Tracks if card is face up (value displayed) or not.
+    in_hand : bool
+        Tracks if card belongs to a hand or is still in the deck.
+    """
     def __init__(self, suit, val, card_val, up=True, h=False):
-        # 3rd param for value of card in blackjack?
         self.suit = suit
         self.value = val
-        # card_value is the Blackjack value of each card (10, 1/11, 1-9)
         self.card_value = card_val
-        # face_up is a Boolean determining if card will be face up or not
         self.face_up = up
         self.in_hand = h
 
