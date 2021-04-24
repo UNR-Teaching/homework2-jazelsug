@@ -6,17 +6,33 @@ from dealer import Dealer
 from player import Player
 from blackjack import BlackJack
 
-'''
 # DECK UNIT TESTS ==========================
 class BuildDeckTests(unittest.TestCase):
     def test_same_deck(self):
         test_deck = Deck()
         new_deck = []
-        for suit in card.suits:
-            for c in card.cards:
-                new_deck.append(card.Card(suit, c, card.cards_values[c]))
-        self.assertCountEqual(test_deck.deck, new_deck)
-'''
+        # read card values into new_deck
+        for suit in suits:
+            for c in cards:
+                new_deck.append(Card(suit, c, cards_values[c]))
+        equals_check = True
+        for x, y in zip(test_deck.deck, new_deck):
+            if x.card_value != y.card_value:
+                equals_check = False
+        self.assertTrue(equals_check)
+
+class ShuffleTests(unittest.TestCase):
+    def test_different_decks(self):
+        deck_one = Deck()
+        deck_two = Deck()
+        # shuffle second deck
+        deck_two.shuffle()
+        equals_check = True
+        for x, y in zip(deck_one.deck, deck_two.deck):
+            if x.card_value != y.card_value:
+                equals_check = False
+        self.assertFalse(equals_check)
+
 
 
 # PERSON UNIT TESTS =================
