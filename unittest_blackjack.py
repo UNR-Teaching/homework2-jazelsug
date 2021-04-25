@@ -260,6 +260,17 @@ class CheckDealersNaturalsTest(unittest.TestCase):
 
 
 # BLACKJACK UNIT TESTS =================
+class DealTests(unittest.TestCase):
+    def test_two_cards_for_player(self):
+        pass
+
+    def test_two_cards_for_dealer(self):
+        pass
+
+    def test_second_dealer_card_face_down(self):
+        pass
+
+
 class GetWinnerTests(unittest.TestCase):
     def test_player_wins(self):
         deck = []
