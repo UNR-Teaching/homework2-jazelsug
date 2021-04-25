@@ -262,13 +262,32 @@ class CheckDealersNaturalsTest(unittest.TestCase):
 # BLACKJACK UNIT TESTS =================
 class DealTests(unittest.TestCase):
     def test_two_cards_for_player(self):
-        pass
+        deck = Deck()
+        player = Player(deck)
+        dealer = Dealer(deck)
+        blackjack = BlackJack(player, dealer)
+        blackjack.deal()
+        players_hand_count = len(player.hand)
+        expected_player_hand_count = 2
+        self.assertEqual(players_hand_count, expected_player_hand_count)
 
     def test_two_cards_for_dealer(self):
-        pass
+        deck = Deck()
+        player = Player(deck)
+        dealer = Dealer(deck)
+        blackjack = BlackJack(player, dealer)
+        blackjack.deal()
+        dealers_hand_count = len(dealer.hand)
+        expected_dealer_hand_count = 2
+        self.assertEqual(dealers_hand_count, expected_dealer_hand_count)
 
     def test_second_dealer_card_face_down(self):
-        pass
+        deck = Deck()
+        player = Player(deck)
+        dealer = Dealer(deck)
+        blackjack = BlackJack(player, dealer)
+        blackjack.deal()
+        self.assertFalse(dealer.hand[1].face_up)
 
 
 class GetWinnerTests(unittest.TestCase):
