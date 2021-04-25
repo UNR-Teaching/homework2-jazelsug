@@ -1,5 +1,13 @@
 pipeline {
+    environment {
+    registry = "jazelyn/blackjack-python"
+    registryCredential = 'dockerhub'
+    dockerImage = ''
+  }
     agent none 
+    options {
+        skipStagesAfterUnstable()
+    }
     stages {
         stage('Build') { 
             agent {
@@ -21,6 +29,16 @@ pipeline {
             steps {
                 sh 'python unittest_blackjack.py'
                 sh 'python integrationtest_blackjack.py'
+            }
+        }
+        stage('Deploy'){
+            steps{
+                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+                    }
+                }
             }
         }
     }
