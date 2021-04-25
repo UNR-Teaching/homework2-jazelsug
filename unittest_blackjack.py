@@ -321,17 +321,29 @@ class GetWinnerTests(unittest.TestCase):
         b.get_winner()
         self.assertEqual(b.winner, "Nobody")
 
-'''
+
 class CheckTiesTests(unittest.TestCase):
     def test_yes_tie(self):
-        deck = []
-        p = Player(deck)
-        d = Dealer(deck)
-        b = BlackJack(p, d)
-        b.dealer.score = 19
-        b.player.score = 19
-        self.assertTrue(b.check_ties())
-'''
+        deck = Deck()
+        player = Player(deck)
+        dealer = Dealer(deck)
+        blackjack = BlackJack(player, dealer)
+        card_ten = Card("Hearts", "K", 10, True)
+        player.hand.append(card_ten)
+        dealer.hand.append(card_ten)
+        player.score = 10
+        self.assertTrue(blackjack.check_ties())
+
+    def test_no_tie(self):
+        deck = Deck()
+        player = Player(deck)
+        dealer = Dealer(deck)
+        blackjack = BlackJack(player, dealer)
+        card_ten = Card("Hearts", "K", 10)
+        card_five = Card("Hearts", "5", 5)
+        player.hand.append(card_ten)
+        dealer.hand.append(card_five)
+        self.assertFalse(blackjack.check_ties())
 
 if __name__ == '__main__':
     unittest.main()
