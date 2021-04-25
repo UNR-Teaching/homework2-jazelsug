@@ -34,7 +34,7 @@ pipeline {
         stage('Deploy'){
             agent {
                 docker {
-                    image 'jazelyn/blackjack-python'
+                    image 'python:2-alpine'
                 }
             }
             steps{
