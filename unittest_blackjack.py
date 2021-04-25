@@ -238,6 +238,25 @@ class FlipCardsTest(unittest.TestCase):
         dealer.flip_cards()
         self.assertTrue(dealer.hand[0].face_up)
         self.assertTrue(dealer.hand[1].face_up)
+    
+class CheckDealersNaturalsTest(unittest.TestCase):
+    def test_yes_natural_with_face_down(self):
+        deck = []
+        dealer = Dealer(deck)
+        c1 = Card("Hearts", "A", 11, True)
+        c2 = Card("Spades", "K", 10, False)
+        dealer.hand.append(c1)
+        dealer.hand.append(c2)
+        self.assertTrue(dealer.check_naturals())
+
+    def test_no_natural_with_face_down(self):
+        deck = []
+        dealer = Dealer(deck)
+        c1 = Card("Hearts", "A", 11, True)
+        c2 = Card("Spades", "3", 3, False)
+        dealer.hand.append(c1)
+        dealer.hand.append(c2)
+        self.assertFalse(dealer.check_naturals())
 
 
 # BLACKJACK UNIT TESTS =================
