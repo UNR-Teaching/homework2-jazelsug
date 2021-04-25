@@ -183,7 +183,6 @@ class CheckBustTests(unittest.TestCase):
         self.assertFalse(person.check_bust())
 
 
-'''
 class GetScoreTests(unittest.TestCase):
     def test_score_updated(self):
         deck = Deck()
@@ -192,13 +191,17 @@ class GetScoreTests(unittest.TestCase):
         c2 = Card("Spades", "9", 9)
         person.hand.append(c1)
         person.hand.append(c2)
-        s = 0
-        for c in person.hand:
-            if c.face_up:
-                s += c.card_value
-        test_score = person.get_score()
-        self.assertEqual(s, test_score)
-'''
+        person.get_score()
+        expected_score = 18
+        self.assertEqual(person.score, expected_score)
+    
+    def test_zero_score(self):
+        deck = Deck()
+        person = Person(deck)
+        # add no cards
+        person.get_score()
+        expected_score = 0
+        self.assertEqual(person.score, expected_score)
 
 
 class CheckNaturalsTests(unittest.TestCase):
