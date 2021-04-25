@@ -75,7 +75,29 @@ class BuildDeckTests(unittest.TestCase):
 
 
 class ShuffleTests(unittest.TestCase):
-    def test_different_decks(self):
+    def test_different_suits(self):
+        deck_one = Deck()
+        deck_two = Deck()
+        # shuffle second deck
+        deck_two.shuffle()
+        equals_check = True
+        for x, y in zip(deck_one.deck, deck_two.deck):
+            if x.suit != y.suit:
+                equals_check = False
+        self.assertFalse(equals_check)
+
+    def test_different_values(self):
+        deck_one = Deck()
+        deck_two = Deck()
+        # shuffle second deck
+        deck_two.shuffle()
+        equals_check = True
+        for x, y in zip(deck_one.deck, deck_two.deck):
+            if x.value != y.value:
+                equals_check = False
+        self.assertFalse(equals_check)
+
+    def test_different_card_values(self):
         deck_one = Deck()
         deck_two = Deck()
         # shuffle second deck
@@ -85,6 +107,28 @@ class ShuffleTests(unittest.TestCase):
             if x.card_value != y.card_value:
                 equals_check = False
         self.assertFalse(equals_check)
+
+    def test_same_face_up(self):
+        deck_one = Deck()
+        deck_two = Deck()
+        # shuffle second deck
+        deck_two.shuffle()
+        equals_check = True
+        for x, y in zip(deck_one.deck, deck_two.deck):
+            if x.face_up != y.face_up:
+                equals_check = False
+        self.assertTrue(equals_check)
+
+    def test_same_in_hands(self):
+        deck_one = Deck()
+        deck_two = Deck()
+        # shuffle second deck
+        deck_two.shuffle()
+        equals_check = True
+        for x, y in zip(deck_one.deck, deck_two.deck):
+            if x.in_hand != y.in_hand:
+                equals_check = False
+        self.assertTrue(equals_check)
 
 
 
