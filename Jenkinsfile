@@ -42,7 +42,7 @@ pipeline {
                     docker.withRegistry('https://580378872946.dkr.ecr.us-east-2.amazonaws.com/blackjack-python',
                     'ecr:us-east-2:my.aws.credentials') {
                         def myImage = docker.build('blackjack-python')
-                        dockerImage.push('latest')
+                        myImage.push('latest')
                     }
                 }
             }
