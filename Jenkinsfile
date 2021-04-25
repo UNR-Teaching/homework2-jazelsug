@@ -9,7 +9,7 @@ pipeline {
             }
             steps {
                 sh 'python -m py_compile card.py deck.py person.py dealer.py player.py blackjack.py' 
-                stash(name: 'compiled-results', includes: 'py_compile,card.py,deck.py,person.py,dealer.py,player.py,blackjack.py') 
+                stash(name: 'compiled-results', includes: 'card.pyc,deck.pyc,person.pyc,dealer.pyc,player.pyc,blackjack.pyc') 
             }
         }
     }
