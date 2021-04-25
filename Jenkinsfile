@@ -15,7 +15,7 @@ pipeline {
         stage('Test') {
             agent {
                 docker {
-                    image 'eloomi/unittest'
+                    image 'python:2-alpine'
                 }
             }
             steps {
