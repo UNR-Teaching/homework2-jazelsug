@@ -343,7 +343,7 @@ class CheckTiesTests(unittest.TestCase):
         card_five = Card("Hearts", "5", 5)
         player.hand.append(card_ten)
         dealer.hand.append(card_five)
-        self.assertTrue(blackjack.check_ties())    # orig. assertFalse
+        self.assertFalse(blackjack.check_ties())
 
 if __name__ == '__main__':
     unittest.main()
