@@ -4,9 +4,7 @@ pipeline {
     registryCredential = 'dockerhub'
     dockerImage = ''
   }
-    agent {
-        docker { image 'node:latest' }
-    }
+    agent none 
     options {
         skipStagesAfterUnstable()
     }
@@ -34,6 +32,9 @@ pipeline {
             }
         }
         stage('Deploy'){
+            agent {
+                docker { image 'node:latest' }
+            }
             steps{
                 script {
                     docker.withRegistry('https://580378872946.dkr.ecr.us-east-2.amazonaws.com/blackjack-python',
