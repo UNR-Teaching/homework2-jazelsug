@@ -8,7 +8,33 @@ from blackjack import BlackJack
 
 # DECK UNIT TESTS ==========================
 class BuildDeckTests(unittest.TestCase):
-    def test_same_deck(self):
+    def test_same_suits(self):
+        test_deck = Deck()
+        new_deck = []
+        # read card values into new_deck
+        for suit in suits:
+            for c in cards:
+                new_deck.append(Card(suit, c, cards_values[c]))
+        equals_check = True
+        for x, y in zip(test_deck.deck, new_deck):
+            if x.suit != y.suit:
+                equals_check = False
+        self.assertTrue(equals_check)
+    
+    def test_same_values(self):
+        test_deck = Deck()
+        new_deck = []
+        # read card values into new_deck
+        for suit in suits:
+            for c in cards:
+                new_deck.append(Card(suit, c, cards_values[c]))
+        equals_check = True
+        for x, y in zip(test_deck.deck, new_deck):
+            if x.value != y.value:
+                equals_check = False
+        self.assertTrue(equals_check)
+
+    def test_same_card_values(self):
         test_deck = Deck()
         new_deck = []
         # read card values into new_deck
@@ -20,6 +46,33 @@ class BuildDeckTests(unittest.TestCase):
             if x.card_value != y.card_value:
                 equals_check = False
         self.assertTrue(equals_check)
+
+    def test_same_face_up(self):
+        test_deck = Deck()
+        new_deck = []
+        # read card values into new_deck
+        for suit in suits:
+            for c in cards:
+                new_deck.append(Card(suit, c, cards_values[c]))
+        equals_check = True
+        for x, y in zip(test_deck.deck, new_deck):
+            if x.face_up != y.face_up:
+                equals_check = False
+        self.assertTrue(equals_check)
+    
+    def test_same_in_hand(self):
+        test_deck = Deck()
+        new_deck = []
+        # read card values into new_deck
+        for suit in suits:
+            for c in cards:
+                new_deck.append(Card(suit, c, cards_values[c]))
+        equals_check = True
+        for x, y in zip(test_deck.deck, new_deck):
+            if x.in_hand != y.in_hand:
+                equals_check = False
+        self.assertTrue(equals_check)
+
 
 class ShuffleTests(unittest.TestCase):
     def test_different_decks(self):
