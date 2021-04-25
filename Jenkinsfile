@@ -4,7 +4,9 @@ pipeline {
     registryCredential = 'dockerhub'
     dockerImage = ''
   }
-    agent none 
+    agent {
+        docker { image 'node:latest' }
+    }
     options {
         skipStagesAfterUnstable()
     }
