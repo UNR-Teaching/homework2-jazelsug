@@ -208,12 +208,10 @@ class CheckNaturalsTests(unittest.TestCase):
     def test_yes_natural(self):
         deck = []
         person = Person(deck)
-        c1 = Card("Hearts", "9", 9)
-        c2 = Card("Spades", "9", 9)
-        c3 = Card("Diamonds", "3", 3)
+        c1 = Card("Hearts", "A", 11)
+        c2 = Card("Spades", "J", 10)
         person.hand.append(c1)
         person.hand.append(c2)
-        person.hand.append(c3)
         person.get_score()
         self.assertTrue(person.check_naturals())
 
