@@ -34,9 +34,10 @@ pipeline {
         stage('Deploy'){
             steps{
                 script {
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                    docker.withRegistry( '', registryCredential ) {
-                        dockerImage.push()
+                    docker.withRegistry('https://580378872946.dkr.ecr.us-east-2.amazonaws.com',
+                    'ecr:us-east-2:my.aws.credentials') {
+                        def myImage = docker.build('blackjack-python')
+                        dockerImage.push('latest')
                     }
                 }
             }
