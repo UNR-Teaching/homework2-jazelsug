@@ -131,21 +131,22 @@ class ShuffleTests(unittest.TestCase):
         self.assertTrue(equals_check)
 
 
-
 # PERSON UNIT TESTS =================
 class HitTests(unittest.TestCase):
     def test_card_in_hand(self):
         test_deck = Deck()
         test_person = Person(test_deck)
+        initial_hand_count = len(test_person.hand)
         test_person.hit(True)
-        test_card = test_person.hand[0]
-        self.assertTrue(test_card.in_hand)
+        new_hand_count = len(test_person.hand)
+        self.assertEqual(initial_hand_count + 1, new_hand_count)
 
     def test_card_face_up(self):
         test_deck = Deck()
         test_person = Person(test_deck)
+        last_index = len(test_person.hand)
         test_person.hit(True)
-        test_card = test_person.hand[0]
+        test_card = test_person.hand[last_index]
         self.assertTrue(test_card.face_up)
 
 
