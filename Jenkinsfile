@@ -33,7 +33,9 @@ pipeline {
         }
         stage('Deploy'){
             agent {
-                docker { image 'node:latest' }
+                docker {
+                    image 'jazelyn/blackjack-python'
+                }
             }
             steps{
                 script {
