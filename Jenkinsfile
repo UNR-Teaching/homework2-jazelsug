@@ -32,11 +32,11 @@ pipeline {
             }
         }
         stage('Deploy'){
-            agent {
-                docker {
-                    image 'python:2-alpine'
-                }
-            }
+            //agent {
+            //    docker {
+            //        image 'jazelyn/blackjack-python'
+            //    }
+            //}
             steps{
                 script {
                     docker.withRegistry('https://580378872946.dkr.ecr.us-east-2.amazonaws.com/blackjack-python',
