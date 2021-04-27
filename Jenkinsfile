@@ -34,7 +34,7 @@ pipeline {
         stage('Deploy'){
             steps{
                 script {
-                    docker.withRegistry('public.ecr.aws/k3g3r2j9/blackjack-python-public',
+                    docker.withRegistry('https://public.ecr.aws/k3g3r2j9/blackjack-python-public',
                     'ecr:us-east-2:my.aws.credentials') {
                         def myImage = docker.build('blackjack-python')
                         myImage.push('latest')
