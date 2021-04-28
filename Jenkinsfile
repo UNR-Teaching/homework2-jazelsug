@@ -29,7 +29,7 @@ pipeline {
             steps {
                 sh 'python unittest_blackjack.py'
                 sh 'python integrationtest_blackjack.py'
-                sh 'pip install coverage'
+                sh 'pip3 install coverage'
                 sh 'coverage run -m unittest discover'
                 sh 'coverage report -m'
             }
