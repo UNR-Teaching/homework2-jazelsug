@@ -8,11 +8,6 @@ pipeline {
     }
     stages {
         stage('Build') { 
-            agent {
-                docker {
-                    image 'python:2-alpine' 
-                }
-            }
             steps {
                 sh '''conda create --yes -n ${BUILD_TAG} python
                       source activate ${BUILD_TAG} 
