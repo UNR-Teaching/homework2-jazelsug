@@ -23,13 +23,13 @@ pipeline {
         stage('Test') {
             agent {
                 docker {
-                    image 'python:2-alpine'
+                    image 'python:3'
                 }
             }
             steps {
                 sh 'python unittest_blackjack.py'
                 sh 'python integrationtest_blackjack.py'
-                sh 'pip3 install coverage'
+                sh 'pip install coverage'
                 sh 'coverage run -m unittest discover'
                 sh 'coverage report -m'
             }
