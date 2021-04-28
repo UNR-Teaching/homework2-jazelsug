@@ -1,8 +1,6 @@
 pipeline {
     environment {
-    registry = "jazelyn/blackjack-python"
-    registryCredential = 'dockerhub'
-    dockerImage = ''
+    PATH="/var/lib/jenkins/miniconda3/bin:$PATH"
   }
     agent none 
     options {
@@ -16,8 +14,10 @@ pipeline {
                 }
             }
             steps {
-                sh 'python -m py_compile card.py deck.py person.py dealer.py player.py blackjack.py' 
-                stash(allowEmpty: false, name: 'compiled-results', includes: 'card.pyc,deck.pyc,person.pyc,dealer.pyc,player.pyc,blackjack.pyc') 
+                sh '''conda create --yes -n ${BUILD_TAG} python
+                      source activate ${BUILD_TAG} 
+                      pip install -r requirements.txt
+                    '''
             }
         }
         stage('Test') {
@@ -30,7 +30,7 @@ pipeline {
                 sh 'python unittest_blackjack.py'
                 sh 'python integrationtest_blackjack.py'
                 sh  ''' source activate ${BUILD_TAG}
-                        coverage run unittest_blackjack.py integrationtest_blackjack.py
+                        coverage run unittest_blackjack.py integratontest_blackjack.py
                         python -m coverage xml -o ./reports/coverage.xml
                     '''
             }
