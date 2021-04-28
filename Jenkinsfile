@@ -29,6 +29,7 @@ pipeline {
             steps {
                 sh 'python unittest_blackjack.py'
                 sh 'python integrationtest_blackjack.py'
+                cobertura coberturaReportFile: 'path-to/coverage.xml'
             }
         }
         stage('Deploy'){
