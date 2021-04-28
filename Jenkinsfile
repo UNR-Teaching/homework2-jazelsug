@@ -29,12 +29,8 @@ pipeline {
             steps {
                 sh 'python unittest_blackjack.py'
                 sh 'python integrationtest_blackjack.py'
-            }
-            post {
-                always {
-                    junit '**/nosetests.xml'
-                    step([$class: 'CoberturaPublisher', autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: '**/coverage.xml', failUnhealthy: false, failUnstable: false, maxNumberOfBuilds: 0, onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false])
-                }
+                sh 'coverage run -m unittest discover'
+                sh 'coverage report -m'
             }
         }
         stage('Deploy'){
