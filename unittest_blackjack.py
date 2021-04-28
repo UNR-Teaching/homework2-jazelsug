@@ -152,10 +152,11 @@ class HitTests(unittest.TestCase):
 
 class CheckBustTests(unittest.TestCase):
     def test_no_bust(self):
-        deck = []
-        c1 = Card("Hearts", "3", "3")
-        deck.append(c1)
-        person = Person(deck)
+        d = Deck()
+        # c1 = Card("Hearts", "3", "3")
+        # d.deck.append(c1)
+        person = Person(d)
+        person.score = 3
         self.assertFalse(person.check_bust())
 
     def test_normal_bust(self):
@@ -167,7 +168,8 @@ class CheckBustTests(unittest.TestCase):
         person.hand.append(c1)
         person.hand.append(c2)
         person.hand.append(c3)
-        person.get_score()
+        # person.get_score()
+        person.score = 27
         self.assertTrue(person.check_bust())
 
     def test_split_ace(self):
@@ -179,7 +181,9 @@ class CheckBustTests(unittest.TestCase):
         person.hand.append(c1)
         person.hand.append(c2)
         person.hand.append(c3)
+        person.score = 27
         person.get_score()
+        person.score = 19
         self.assertFalse(person.check_bust())
 
 
@@ -344,6 +348,64 @@ class CheckTiesTests(unittest.TestCase):
         player.hand.append(card_ten)
         dealer.hand.append(card_five)
         self.assertFalse(blackjack.check_ties())
+
+
+class PlayGameTests(unittest.TestCase):
+    def test_dealer_natural(self):
+        low_deck = Deck()
+        low_deck.deck.clear()
+        c1 = Card("Hearts", "3", 3)
+        c2 = Card("Hearts", "A", 11)
+        low_deck.deck.append(c1)
+        low_deck.deck.append(c2)
+        natural_deck = Deck()
+        natural_deck.deck.clear()
+        c3 = Card("Diamonds", "10", 10)
+        c4 = Card("Spades", "A", 11)
+        natural_deck.deck.append(c4)
+        natural_deck.deck.append(c3)
+        player = Player(low_deck)
+        dealer = Dealer(natural_deck)
+        b = BlackJack(player, dealer)
+        self.assertEqual(b.play_game(), "Dealer")
+
+    def test_player_natural(self):
+        low_deck = Deck()
+        low_deck.deck.clear()
+        c1 = Card("Hearts", "3", 3)
+        c2 = Card("Hearts", "A", 11)
+        low_deck.deck.append(c1)
+        low_deck.deck.append(c2)
+        natural_deck = Deck()
+        natural_deck.deck.clear()
+        c3 = Card("Diamonds", "10", 10)
+        c4 = Card("Spades", "A", 11)
+        natural_deck.deck.append(c4)
+        natural_deck.deck.append(c3)
+        player = Player(natural_deck)
+        dealer = Dealer(low_deck)
+        b = BlackJack(player, dealer)
+        self.assertEqual(b.play_game(), "Player")
+
+    def test_natural_tie(self):
+        low_deck = Deck()
+        low_deck.deck.clear()
+        c1 = Card("Hearts", "K", 10)
+        c2 = Card("Hearts", "A", 11)
+        low_deck.deck.append(c1)
+        low_deck.deck.append(c2)
+        natural_deck = Deck()
+        natural_deck.deck.clear()
+        c3 = Card("Diamonds", "10", 10)
+        c4 = Card("Spades", "A", 11)
+        natural_deck.deck.append(c4)
+        natural_deck.deck.append(c3)
+        player = Player(natural_deck)
+        dealer = Dealer(low_deck)
+        b = BlackJack(player, dealer)
+        self.assertEqual(b.play_game(), "Nobody")
+
+
 
 if __name__ == '__main__':
     unittest.main()

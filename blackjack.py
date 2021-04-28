@@ -61,10 +61,9 @@ class BlackJack:
             self.winner = "Player"
         elif self.player.score < self.dealer.score:
             self.winner = "Dealer"
-        elif self.player.score == self.dealer.score:
-            self.winner = "Nobody"
         else:
-            self.winner = None
+            self.player.score == self.dealer.score
+            self.winner = "Nobody"
 
     def show_all_face_up(self):
         """Function for showing the hands of the Dealer and
