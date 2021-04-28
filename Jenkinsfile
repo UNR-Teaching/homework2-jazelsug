@@ -7,8 +7,8 @@ pipeline {
         skipStagesAfterUnstable()
     }
     stages {
-        agent any
         stage('Build') { 
+            agent any
             steps {
                 sh '''conda create --yes -n ${BUILD_TAG} python
                       source activate ${BUILD_TAG} 
