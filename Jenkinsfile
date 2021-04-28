@@ -29,9 +29,10 @@ pipeline {
             steps {
                 sh 'python unittest_blackjack.py'
                 sh 'python integrationtest_blackjack.py'
-                sh 'pip install coverage'
-                sh 'coverage run -m unittest discover'
-                sh 'coverage report -m'
+                sh  ''' source activate ${BUILD_TAG}
+                        coverage run unittest_blackjack.py integrationtest_blackjack.py
+                        python -m coverage xml -o ./reports/coverage.xml
+                    '''
             }
         }
         stage('Deploy'){
